@@ -1,8 +1,9 @@
-<!DOCTYPE web-app PUBLIC
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- !DOCTYPE web-app PUBLIC
  "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+ "http://java.sun.com/dtd/web-app_2_3.dtd" -->
 
- <?xml version="1.0" encoding="UTF-8"?>
+
 <web-app xmlns="http://java.sun.com/xml/ns/javaee" 
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
@@ -14,7 +15,7 @@
   <!-- Student Servlet -->
   <servlet>
       <servlet-name>StudentServlet</servlet-name>
-      <servlet-class>com.learnersacademy.controller.StudentServlet</servlet-class>
+      <servlet-class>com.learnersacademy.servlets.StudentServlet</servlet-class>
   </servlet>
   <servlet-mapping>
       <servlet-name>StudentServlet</servlet-name>
@@ -24,7 +25,7 @@
   <!-- Teacher Servlet -->
   <servlet>
       <servlet-name>TeacherServlet</servlet-name>
-      <servlet-class>com.learnersacademy.controller.TeacherServlet</servlet-class>
+      <servlet-class>com.learnersacademy.servlets.TeacherServlet</servlet-class>
   </servlet>
   <servlet-mapping>
       <servlet-name>TeacherServlet</servlet-name>
@@ -34,7 +35,7 @@
   <!-- Class Servlet -->
   <servlet>
       <servlet-name>ClassServlet</servlet-name>
-      <servlet-class>com.learnersacademy.controller.ClassServlet</servlet-class>
+      <servlet-class>com.learnersacademy.servlets.ClassServlet</servlet-class>
   </servlet>
   <servlet-mapping>
       <servlet-name>ClassServlet</servlet-name>
@@ -44,7 +45,7 @@
   <!-- Admin Servlet -->
   <servlet>
       <servlet-name>AdminServlet</servlet-name>
-      <servlet-class>com.learnersacademy.controller.AdminServlet</servlet-class>
+      <servlet-class>com.learnersacademy.servlets.AdminServlet</servlet-class>
   </servlet>
   <servlet-mapping>
       <servlet-name>AdminServlet</servlet-name>
