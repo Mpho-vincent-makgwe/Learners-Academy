@@ -1,7 +1,5 @@
 package com.learnersacademy.servlets;
 
-import com.learnersacademy.model.Class;
-import com.learnersacademy.service.ClassService;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -11,6 +9,10 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.List;
+
+import com.learnersacademy.model.Class;
+import com.learnersacademy.service.ClassService;
+
 
 @WebServlet("/classes")
 public class ClassServlet extends HttpServlet {

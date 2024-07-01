@@ -27,5 +27,28 @@
 
         <!-- Drop and re-create the database schema on startup -->
         <property name="hibernate.hbm2ddl.auto">update</property>
+        
+        <!-- Mapping classes -->
+        <mapping class="com.learnersacademy.model.Student"/>
+        <mapping class="com.learnersacademy.model.Class"/>
+        <mapping class="com.learnersacademy.model.Admin"/>
+        <mapping class="com.learnersacademy.model.Teacher"/>
+        
+        <mapping class="com.learnersacademy.dao.StudentDao"/>
+        <mapping class="com.learnersacademy.dao.ClassDao"/>
+        <mapping class="com.learnersacademy.dao.AdminDao"/>
+        <mapping class="com.learnersacademy.dao.TeacherDao"/>
+        
+        <mapping class="com.learnersacademy.service.StudentService"/>
+        <mapping class="com.learnersacademy.service.ClassService"/>
+        <mapping class="com.learnersacademy.service.AdminService"/>
+        <mapping class="com.learnersacademy.service.TeacherService"/>
+        
+        <mapping class="com.learnersacademy.servlets.StudentServlet"/>
+        <mapping class="com.learnersacademy.servlets.ClassServlet"/>
+        <mapping class="com.learnersacademy.servlets.AdminServlet"/>
+        <mapping class="com.learnersacademy.servlets.TeacherServlet"/>
+        
+        <mapping class="com.learnersacademy.util.HibernateUtil"/>
     </session-factory>
 </hibernate-configuration>
