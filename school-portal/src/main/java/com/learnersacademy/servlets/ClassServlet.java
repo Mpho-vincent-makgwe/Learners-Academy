@@ -13,7 +13,6 @@ import java.util.List;
 import com.learnersacademy.model.Class;
 import com.learnersacademy.service.ClassService;
 
-
 @WebServlet("/classes")
 public class ClassServlet extends HttpServlet {
     private ClassService classService = new ClassService();

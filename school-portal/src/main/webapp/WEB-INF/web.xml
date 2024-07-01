@@ -14,13 +14,14 @@
   
   <!-- Student Servlet -->
   <servlet>
-      <servlet-name>StudentServlet</servlet-name>
-      <servlet-class>com.learnersacademy.servlets.StudentServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-      <servlet-name>StudentServlet</servlet-name>
-      <url-pattern>/students</url-pattern>
-  </servlet-mapping>
+    <servlet-name>StudentServlet</servlet-name>
+    <servlet-class>com.learnersacademy.servlets.StudentServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>StudentServlet</servlet-name>
+    <url-pattern>/students</url-pattern>
+</servlet-mapping>
+
   
   <!-- Teacher Servlet -->
   <servlet>
@@ -54,7 +55,7 @@
 
   <!-- Welcome file list -->
   <welcome-file-list>
-      <welcome-file>index.jsp</welcome-file>
+      <welcome-file>index.html</welcome-file>
   </welcome-file-list>
 
 </web-app>
