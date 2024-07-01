@@ -1,4 +1,4 @@
-package com.learnersacademy.controller;
+package com.learnersacademy.servlets;
 
 import com.learnersacademy.model.Student;
 import com.learnersacademy.service.StudentService;
