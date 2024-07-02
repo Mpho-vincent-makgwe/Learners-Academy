@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,17 +19,13 @@
             <th>Name</th>
             <th>Email</th>
         </tr>
-        <!-- Replace this with static HTML for student list -->
-        <tr>
-            <td>1</td>
-            <td>Student A</td>
-            <td>studentA@example.com</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Student B</td>
-            <td>studentB@example.com</td>
-        </tr>
+        <c:forEach var="student" items="${students}">
+            <tr>
+                <td>${student.id}</td>
+                <td>${student.name}</td>
+                <td>${student.email}</td>
+            </tr>
+        </c:forEach>
     </table>
 </body>
 </html>

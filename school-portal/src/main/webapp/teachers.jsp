@@ -1,7 +1,9 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Teachers</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
     <h2>Teachers</h2>
@@ -17,17 +19,13 @@
             <th>Name</th>
             <th>Email</th>
         </tr>
-        <!-- Replace this with static HTML for teacher list -->
-        <tr>
-            <td>1</td>
-            <td>Teacher A</td>
-            <td>teacherA@example.com</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Teacher B</td>
-            <td>teacherB@example.com</td>
-        </tr>
+        <c:forEach var="teacher" items="${teachers}">
+            <tr>
+                <td>${teacher.id}</td>
+                <td>${teacher.name}</td>
+                <td>${teacher.email}</td>
+            </tr>
+        </c:forEach>
     </table>
 </body>
 </html>

@@ -1,7 +1,9 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Admin</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
     <h2>Admin</h2>
@@ -16,15 +18,12 @@
             <th>ID</th>
             <th>Username</th>
         </tr>
-        <!-- Replace this with static HTML for admin list -->
-        <tr>
-            <td>1</td>
-            <td>Admin1</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Admin2</td>
-        </tr>
+        <c:forEach var="admin" items="${admins}">
+            <tr>
+                <td>${admin.id}</td>
+                <td>${admin.username}</td>
+            </tr>
+        </c:forEach>
     </table>
 </body>
 </html>

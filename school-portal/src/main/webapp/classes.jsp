@@ -1,7 +1,9 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Classes</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
     <h2>Classes</h2>
@@ -15,15 +17,12 @@
             <th>ID</th>
             <th>Name</th>
         </tr>
-        <!-- Replace this with static HTML for class list -->
-        <tr>
-            <td>1</td>
-            <td>Class A</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Class B</td>
-        </tr>
+        <c:forEach var="class" items="${classes}">
+            <tr>
+                <td>${class.id}</td>
+                <td>${class.name}</td>
+            </tr>
+        </c:forEach>
     </table>
 </body>
 </html>
