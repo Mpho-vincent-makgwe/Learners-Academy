@@ -12,6 +12,6 @@ public class ClassService {
     }
 
     public List<Class> getAllClasses() {
-        return classDAO.getClasses();
+        return classDAO.getAllClasses();
     }
 }

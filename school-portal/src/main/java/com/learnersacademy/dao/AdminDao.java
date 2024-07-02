@@ -1,9 +1,10 @@
 package com.learnersacademy.dao;
 
 import com.learnersacademy.model.Admin;
+import com.learnersacademy.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import com.learnersacademy.util.HibernateUtil;
+
 import java.util.List;
 
 public class AdminDao {
@@ -21,7 +22,7 @@ public class AdminDao {
         }
     }
 
-    public List<Admin> getAdmins() {
+    public List<Admin> getAllAdmins() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.createQuery("from Admin", Admin.class).list();
         }

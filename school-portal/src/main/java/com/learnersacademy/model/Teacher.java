@@ -13,12 +13,23 @@ public class Teacher {
     private String name;
     private String email;
 
+    public Teacher() {
+        // Default constructor required by Hibernate
+    }
+
     public Teacher(String name, String email) {
         this.name = name;
         this.email = email;
     }
 
-    // Getters and setters for 'name' and 'email'
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }

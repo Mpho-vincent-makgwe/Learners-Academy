@@ -1,5 +1,8 @@
 package com.learnersacademy.servlets;
 
+import com.learnersacademy.dao.TeacherDao;
+import com.learnersacademy.model.Teacher;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -9,26 +12,29 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-import com.learnersacademy.model.Teacher;
-import com.learnersacademy.service.TeacherService;
-
-@WebServlet("/teachers")
+@WebServlet("/teacher")
 public class TeacherServlet extends HttpServlet {
-    private TeacherService teacherService = new TeacherService();
+    private static final long serialVersionUID = 1L;
+    private TeacherDao teacherDao;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Teacher> teachers = teacherService.getAllTeachers();
-        req.setAttribute("teachers", teachers);
-        req.getRequestDispatcher("teachers.jsp").forward(req, resp);
+    public void init() throws ServletException {
+        teacherDao = new TeacherDao();
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String name = req.getParameter("name");
-        String email = req.getParameter("email");
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Teacher> teachers = teacherDao.getAllTeachers();
+        request.setAttribute("teachers", teachers);
+        request.getRequestDispatcher("teachers.jsp").forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
         Teacher teacher = new Teacher(name, email);
-        teacherService.addTeacher(teacher);
-        resp.sendRedirect("teachers");
+        teacherDao.saveTeacher(teacher);
+        response.sendRedirect("teacher");
     }
 }

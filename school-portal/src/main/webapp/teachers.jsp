@@ -1,31 +1,22 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.learnersacademy.model.Teacher" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Teachers</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-    <h2>Teachers</h2>
-    <form action="teachers" method="post">
-        Name: <input type="text" name="name" required>
-        Email: <input type="email" name="email" required>
-        <input type="submit" value="Add Teacher">
-    </form>
-    <h3>Teacher List</h3>
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-        </tr>
+    <h1>Teachers</h1>
+    <ul>
         <c:forEach var="teacher" items="${teachers}">
-            <tr>
-                <td>${teacher.id}</td>
-                <td>${teacher.name}</td>
-                <td>${teacher.email}</td>
-            </tr>
+            <li>${teacher.name} (${teacher.email})</li>
         </c:forEach>
-    </table>
+    </ul>
+    <form action="teacher" method="post">
+        <input type="text" name="name" placeholder="Teacher Name" required>
+        <input type="email" name="email" placeholder="Teacher Email" required>
+        <button type="submit">Add Teacher</button>
+    </form>
+    <a href="index.jsp">Back to Home</a>
 </body>
 </html>

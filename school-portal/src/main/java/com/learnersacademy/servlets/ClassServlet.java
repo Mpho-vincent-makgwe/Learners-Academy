@@ -1,6 +1,5 @@
 package com.learnersacademy.servlets;
 
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -8,27 +7,54 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.List;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-import com.learnersacademy.model.Class;
-import com.learnersacademy.service.ClassService;
-
-@WebServlet("/classes")
+@WebServlet("/class")
 public class ClassServlet extends HttpServlet {
-    private ClassService classService = new ClassService();
+    private static final long serialVersionUID = 1L;
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Class> classes = classService.getAllClasses();
-        req.setAttribute("classes", classes);
-        req.getRequestDispatcher("classes.jsp").forward(req, resp);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+        out.println("<html><body>");
+        out.println("<h1>Classes</h1>");
+        
+        try {
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/LearnersAcademy", "root", "kHing$!x6");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM classes");
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                out.println("<p>" + rs.getString("name") + "</p>");
+            }
+            
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            out.println("<p>Error retrieving classes</p>");
+        }
+        
+        out.println("</body></html>");
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String name = req.getParameter("name");
-        Class classObj = new Class(name);
-        classService.addClass(classObj);
-        resp.sendRedirect("classes");
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String name = request.getParameter("name");
+        
+        try {
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/LearnersAcademy", "root", "kHing$!x6");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO classes (name) VALUES (?)");
+            ps.setString(1, name);
+            ps.executeUpdate();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        response.sendRedirect("class");
     }
 }

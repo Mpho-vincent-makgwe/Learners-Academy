@@ -1,31 +1,22 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="com.learnersacademy.model.Student" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Students</title>
 </head>
 <body>
-    <h2>Students</h2>
-    <form action="students" method="post">
-        Name: <input type="text" name="name" required>
-        Email: <input type="email" name="email" required>
-        <input type="submit" value="Add Student">
-    </form>
-    <h3>Student List</h3>
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-        </tr>
+    <h1>Students</h1>
+    <ul>
         <c:forEach var="student" items="${students}">
-            <tr>
-                <td>${student.id}</td>
-                <td>${student.name}</td>
-                <td>${student.email}</td>
-            </tr>
+            <li>${student.name} (${student.email})</li>
         </c:forEach>
-    </table>
+    </ul>
+    <form action="student" method="post">
+        <input type="text" name="name" placeholder="Student Name" required>
+        <input type="email" name="email" placeholder="Student Email" required>
+        <button type="submit">Add Student</button>
+    </form>
+    <a href="index.jsp">Back to Home</a>
 </body>
 </html>

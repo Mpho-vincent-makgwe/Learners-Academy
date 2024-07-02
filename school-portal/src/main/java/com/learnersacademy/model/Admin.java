@@ -1,15 +1,35 @@
 package com.learnersacademy.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Admin {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String username;
     private String password;
+
+    public Admin() {
+        // Default constructor required by Hibernate
+    }
 
     public Admin(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
-    // Getters and setters for 'username' and 'password'
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getUsername() {
         return username;
     }

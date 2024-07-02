@@ -1,29 +1,22 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.learnersacademy.model.Admin" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Admin</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>Admins</title>
 </head>
 <body>
-    <h2>Admin</h2>
-    <form action="admin" method="post">
-        Username: <input type="text" name="username" required>
-        Password: <input type="password" name="password" required>
-        <input type="submit" value="Add Admin">
-    </form>
-    <h3>Admin List</h3>
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>Username</th>
-        </tr>
+    <h1>Admins</h1>
+    <ul>
         <c:forEach var="admin" items="${admins}">
-            <tr>
-                <td>${admin.id}</td>
-                <td>${admin.username}</td>
-            </tr>
+            <li>${admin.username}</li>
         </c:forEach>
-    </table>
+    </ul>
+    <form action="admin" method="post">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Add Admin</button>
+    </form>
+    <a href="index.jsp">Back to Home</a>
 </body>
 </html>

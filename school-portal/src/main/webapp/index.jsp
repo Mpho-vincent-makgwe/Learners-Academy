@@ -1,16 +1,17 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Welcome to LearnAcademy</title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>Learners Academy</title>
 </head>
 <body>
-    <h1>Welcome to LearnAcademy</h1>
-    <a href="students.jsp">View Students</a>
-    <a href="teachers.jsp">View Teachers</a>
-    <a href="classes.jsp">View Classes</a>
-    <a href="admin.jsp">View Admins</a>
+    <h1>Welcome to Learners Academy</h1>
+    <nav>
+        <ul>
+            <li><a href="admin">Admins</a></li>
+            <li><a href="class">Classes</a></li>
+            <li><a href="student">Students</a></li>
+            <li><a href="teacher">Teachers</a></li>
+        </ul>
+    </nav>
 </body>
 </html>

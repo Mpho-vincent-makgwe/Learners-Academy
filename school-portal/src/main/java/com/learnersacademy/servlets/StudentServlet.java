@@ -1,9 +1,7 @@
 package com.learnersacademy.servlets;
 
-import com.learnersacademy.entities.Student;
-import com.learnersacademy.util.HibernateUtil;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import com.learnersacademy.dao.StudentDao;
+import com.learnersacademy.model.Student;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,27 +12,29 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-import com.learnersacademy.service.StudentService;
-
-@WebServlet("/students")
+@WebServlet("/student")
 public class StudentServlet extends HttpServlet {
-    private StudentService studentService = new StudentService();
+    private static final long serialVersionUID = 1L;
+    private StudentDao studentDao;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Student> students = studentService.getAllStudents();
-        req.setAttribute("students", students);
-        req.getRequestDispatcher("/students.jsp").forward(req, resp);
+    public void init() throws ServletException {
+        studentDao = new StudentDao();
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String name = req.getParameter("name");
-        String email = req.getParameter("email");
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Student> students = studentDao.getAllStudents();
+        request.setAttribute("students", students);
+        request.getRequestDispatcher("students.jsp").forward(request, response);
+    }
 
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
         Student student = new Student(name, email);
-        studentService.addStudent(student);
-
-        resp.sendRedirect(req.getContextPath() + "/students");
+        studentDao.saveStudent(student);
+        response.sendRedirect("student");
     }
 }

@@ -10,12 +10,12 @@ public class DataLoader {
         Transaction transaction = session.beginTransaction();
 
         Student student1 = new Student();
-        student1.setName("John Doe");
-        student1.setEmail("john.doe@example.com");
+        student1.setName("Mpho Vincent");
+        student1.setEmail("mpho.doe@example.com");
 
         Student student2 = new Student();
-        student2.setName("Jane Smith");
-        student2.setEmail("jane.smith@example.com");
+        student2.setName("Crane Smith");
+        student2.setEmail("crane.smith@example.com");
 
         session.save(student1);
         session.save(student2);
