@@ -14,13 +14,8 @@ import java.util.List;
 
 @WebServlet("/student")
 public class StudentServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-    private StudentDao studentDao;
-
-    @Override
-    public void init() throws ServletException {
-        studentDao = new StudentDao();
-    }
+	private static final long serialVersionUID = 1L;
+    private StudentDao studentDao = new StudentDao();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

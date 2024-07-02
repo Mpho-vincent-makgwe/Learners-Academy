@@ -13,33 +13,21 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+
+import com.learnersacademy.dao.ClassDao;
+import com.learnersacademy.model.Class;
 
 @WebServlet("/class")
 public class ClassServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
+    private ClassDao schoolClassDao = new ClassDao();
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        out.println("<html><body>");
-        out.println("<h1>Classes</h1>");
-        
-        try {
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/LearnersAcademy", "root", "kHing$!x6");
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM classes");
-            ResultSet rs = ps.executeQuery();
-            
-            while (rs.next()) {
-                out.println("<p>" + rs.getString("name") + "</p>");
-            }
-            
-            con.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            out.println("<p>Error retrieving classes</p>");
-        }
-        
-        out.println("</body></html>");
+        List<Class> schoolClasses = schoolClassDao.getAllClasses();
+        request.setAttribute("schoolClasses", schoolClasses);
+        request.getRequestDispatcher("schoolclasses.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

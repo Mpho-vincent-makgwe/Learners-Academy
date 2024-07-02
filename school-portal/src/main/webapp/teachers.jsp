@@ -3,20 +3,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Teachers</title>
+    <title>Teacher List</title>
 </head>
 <body>
-    <h1>Teachers</h1>
-    <ul>
-        <c:forEach var="teacher" items="${teachers}">
-            <li>${teacher.name} (${teacher.email})</li>
-        </c:forEach>
-    </ul>
-    <form action="teacher" method="post">
-        <input type="text" name="name" placeholder="Teacher Name" required>
-        <input type="email" name="email" placeholder="Teacher Email" required>
-        <button type="submit">Add Teacher</button>
-    </form>
-    <a href="index.jsp">Back to Home</a>
+    <h1>Teacher List</h1>
+    <c:choose>
+        <c:when test="${empty teachers}">
+            <p>No teachers found.</p>
+        </c:when>
+        <c:otherwise>
+            <table border="1">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Subject</th>
+                </tr>
+                <c:forEach var="teacher" items="${teachers}">
+                    <tr>
+                        <td>${teacher.id}</td>
+                        <td>${teacher.name}</td>
+                        <td>${teacher.subject}</td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </c:otherwise>
+    </c:choose>
 </body>
 </html>
+
