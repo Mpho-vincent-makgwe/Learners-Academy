@@ -1,11 +1,9 @@
 package com.learnersacademy.servlets;
 
-import java.io.IOException;
-import java.util.List;
-
-import com.learnersacademy.dao.StudentDao;
-import com.learnersacademy.model.Student;
-import com.learnersacademy.service.StudentService;
+import com.learnersacademy.entities.Student;
+import com.learnersacademy.util.HibernateUtil;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,14 +11,18 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import java.io.IOException;
+import java.util.List;
+
+import com.learnersacademy.service.StudentService;
+
 @WebServlet("/students")
 public class StudentServlet extends HttpServlet {
-	private StudentDao studentDao = new StudentDao();
     private StudentService studentService = new StudentService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<com.learnersacademy.entities.Student> students = studentDao.getAllStudents();
+        List<Student> students = studentService.getAllStudents();
         req.setAttribute("students", students);
         req.getRequestDispatcher("/students.jsp").forward(req, resp);
     }

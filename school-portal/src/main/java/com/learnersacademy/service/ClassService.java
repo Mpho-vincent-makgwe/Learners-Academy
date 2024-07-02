@@ -1,31 +1,17 @@
 package com.learnersacademy.service;
 
+import com.learnersacademy.dao.ClassDao;
+import com.learnersacademy.model.Class;
 import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-
-import com.learnersacademy.model.SchoolClass;
-import com.learnersacademy.util.HibernateUtil;
-
 public class ClassService {
-    public List<SchoolClass> getAllClasses() {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("from SchoolClass", SchoolClass.class).list();
-        }
+    private ClassDao classDAO = new ClassDao();
+
+    public void addClass(Class clazz) {
+        classDAO.saveClass(clazz);
     }
 
-    public void addSchoolClass(SchoolClass classObj) {
-        Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            session.save(classObj);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
+    public List<Class> getAllClasses() {
+        return classDAO.getClasses();
     }
 }

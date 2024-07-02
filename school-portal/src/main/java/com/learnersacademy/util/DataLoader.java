@@ -1,9 +1,8 @@
 package com.learnersacademy.util;
 
+import com.learnersacademy.entities.Student;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
-import com.learnersacademy.entities.Student;
 
 public class DataLoader {
     public static void main(String[] args) {

@@ -1,15 +1,13 @@
 package com.learnersacademy.dao;
 
-import java.util.List;
-
+import com.learnersacademy.model.Class;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
-import com.learnersacademy.model.SchoolClass;
 import com.learnersacademy.util.HibernateUtil;
+import java.util.List;
 
 public class ClassDao {
-    public void saveClass(SchoolClass clazz) {
+    public void saveClass(Class clazz) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
@@ -23,9 +21,9 @@ public class ClassDao {
         }
     }
 
-    public List<SchoolClass> getClasses() {
+    public List<Class> getClasses() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("from Class", SchoolClass.class).list();
+            return session.createQuery("from Class", Class.class).list();
         }
     }
 }

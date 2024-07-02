@@ -1,12 +1,10 @@
 package com.learnersacademy.dao;
 
-import java.util.List;
-
+import com.learnersacademy.model.Admin;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
-import com.learnersacademy.model.Admin;
 import com.learnersacademy.util.HibernateUtil;
+import java.util.List;
 
 public class AdminDao {
     public void saveAdmin(Admin admin) {

@@ -1,11 +1,8 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Welcome to LearnersAcademy</title>
+    <title>Welcome to LearnAcademy</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>

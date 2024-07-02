@@ -1,10 +1,9 @@
 package com.learnersacademy.service;
 
 
-import java.util.List;
-
 import com.learnersacademy.dao.TeacherDao;
 import com.learnersacademy.model.Teacher;
+import java.util.List;
 
 public class TeacherService {
 	private TeacherDao teacherDAO = new TeacherDao();
