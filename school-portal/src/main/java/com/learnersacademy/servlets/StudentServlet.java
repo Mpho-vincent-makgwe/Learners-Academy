@@ -1,15 +1,17 @@
 package com.learnersacademy.servlets;
 
+import java.io.IOException;
+import java.util.List;
+
 import com.learnersacademy.dao.StudentDao;
 import com.learnersacademy.model.Student;
 import com.learnersacademy.service.StudentService;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.List;
 
 @WebServlet("/students")
 public class StudentServlet extends HttpServlet {

@@ -1,10 +1,12 @@
 package com.learnersacademy.service;
 
-import com.learnersacademy.model.SchoolClass;
-import com.learnersacademy.util.HibernateUtil;
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import java.util.List;
+
+import com.learnersacademy.model.SchoolClass;
+import com.learnersacademy.util.HibernateUtil;
 
 public class ClassService {
     public List<SchoolClass> getAllClasses() {
