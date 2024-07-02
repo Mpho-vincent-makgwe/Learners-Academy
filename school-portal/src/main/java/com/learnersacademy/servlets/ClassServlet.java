@@ -1,16 +1,13 @@
 package com.learnersacademy.servlets;
 
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
 import java.util.List;
-
-import com.learnersacademy.model.Class;
+import com.learnersacademy.model.SchoolClass;
 import com.learnersacademy.service.ClassService;
 
 @WebServlet("/classes")
@@ -19,7 +16,7 @@ public class ClassServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Class> classes = classService.getAllClasses();
+        List<SchoolClass> classes = classService.getAllClasses();
         req.setAttribute("classes", classes);
         req.getRequestDispatcher("classes.jsp").forward(req, resp);
     }
@@ -27,8 +24,8 @@ public class ClassServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");
-        Class classObj = new Class(name);
-        classService.addClass(classObj);
+        SchoolClass classObj = new SchoolClass(name);
+        classService.addSchoolClass(classObj);
         resp.sendRedirect("classes");
     }
 }

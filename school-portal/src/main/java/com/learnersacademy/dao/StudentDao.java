@@ -2,12 +2,15 @@ package com.learnersacademy.dao;
 
 import java.util.List;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import com.learnersacademy.entities.Student;
 import com.learnersacademy.util.HibernateUtil;
 
 public class StudentDao {
-    public void saveStudent(Student student) {
+	private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+
+    public void saveStudent(com.learnersacademy.model.Student student) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
@@ -22,8 +25,11 @@ public class StudentDao {
     }
 
     public List<Student> getAllStudents() {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("from Student", Student.class).list();
+        try (Session session = sessionFactory.openSession()) {
+            return session.createQuery("FROM Student", Student.class).list();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

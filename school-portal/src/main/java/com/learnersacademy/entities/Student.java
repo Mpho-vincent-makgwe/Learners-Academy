@@ -13,16 +13,17 @@ public class Student {
     private String name;
     private String email;
 
+    // Default constructor required by Hibernate
     public Student() {
-        // Default constructor required by Hibernate
     }
 
+    // Parameterized constructor
     public Student(String name, String email) {
         this.name = name;
         this.email = email;
     }
 
-    // Getters and setters for 'name' and 'email'
+    // Getters and setters
     public Long getId() {
         return id;
     }

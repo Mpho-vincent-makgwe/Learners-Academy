@@ -2,6 +2,7 @@ package com.learnersacademy.service;
 
 import com.learnersacademy.dao.StudentDao;
 import com.learnersacademy.model.Student;
+
 import java.util.List;
 
 public class StudentService {
@@ -11,7 +12,7 @@ public class StudentService {
         studentDAO.saveStudent(student);
     }
 
-    public List<Student> getAllStudents() {
+    public List<com.learnersacademy.entities.Student> getAllStudents() {
         return studentDAO.getAllStudents();
     }
 }
