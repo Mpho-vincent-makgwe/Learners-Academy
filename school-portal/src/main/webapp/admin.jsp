@@ -1,14 +1,12 @@
-
-<%@ page import="java.util.List" %>
 <%@ page import="com.learnersacademy.model.Admin" %>
-
+<%@ page import="java.util.List" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Admin List</title>
 </head>
 <body>
     <h1>Admin List</h1>
-    
     <c:choose>
         <c:when test="${empty admins}">
             <p>No admins found.</p>
@@ -30,15 +28,5 @@
             </table>
         </c:otherwise>
     </c:choose>
-
-    <form action="AddAdminServlet" method="post">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
-        
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-        
-        <input type="submit" value="Add Admin">
-    </form>
 </body>
 </html>

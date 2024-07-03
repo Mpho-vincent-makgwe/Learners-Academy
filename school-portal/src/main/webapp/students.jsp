@@ -1,4 +1,3 @@
-<!-- students.jsp -->
 
 <%@ page import="java.util.List" %>
 <%@ page import="com.learnersacademy.model.Student" %>
