@@ -5,7 +5,7 @@
          version="3.1">
     <servlet>
         <servlet-name>AdminServlet</servlet-name>
-        <servlet-class>com.learnersacademy.servlet.AdminServlet</servlet-class>
+        <servlet-class>com.learnersacademy.controller.AdminServlet1</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AdminServlet</servlet-name>
@@ -14,7 +14,7 @@
     
     <servlet>
         <servlet-name>ClassServlet</servlet-name>
-        <servlet-class>com.learnersacademy.servlet.ClassServlet</servlet-class>
+        <servlet-class>com.learnersacademy.controller.ClassServlet1</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ClassServlet</servlet-name>
@@ -23,7 +23,7 @@
 
     <servlet>
         <servlet-name>StudentServlet</servlet-name>
-        <servlet-class>com.learnersacademy.servlet.StudentServlet</servlet-class>
+        <servlet-class>com.learnersacademy.controller.StudentServlet1</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>StudentServlet</servlet-name>
@@ -32,7 +32,7 @@
 
     <servlet>
         <servlet-name>TeacherServlet</servlet-name>
-        <servlet-class>com.learnersacademy.servlet.TeacherServlet</servlet-class>
+        <servlet-class>com.learnersacademy.controller.TeacherServlet1</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>TeacherServlet</servlet-name>
