@@ -8,9 +8,9 @@
     <nav>
         <ul>
             <li><a href="admin">Admins</a></li>
-            <li><a href="class">Classes</a></li>
-            <li><a href="student">Students</a></li>
-            <li><a href="teacher">Teachers</a></li>
+            <li><a href="schoolclasses">Classes</a></li>
+            <li><a href="students">Students</a></li>
+            <li><a href="teachers">Teachers</a></li>
         </ul>
     </nav>
 </body>

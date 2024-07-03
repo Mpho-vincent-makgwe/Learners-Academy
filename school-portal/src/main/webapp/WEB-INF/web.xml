@@ -4,39 +4,39 @@
          http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
     <servlet>
-        <servlet-name>AdminServlet</servlet-name>
+        <servlet-name>AdminServlet1</servlet-name>
         <servlet-class>com.learnersacademy.controller.AdminServlet1</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>AdminServlet</servlet-name>
+        <servlet-name>AdminServlet1</servlet-name>
         <url-pattern>/admin</url-pattern>
     </servlet-mapping>
     
     <servlet>
-        <servlet-name>ClassServlet</servlet-name>
+        <servlet-name>ClassServlet1</servlet-name>
         <servlet-class>com.learnersacademy.controller.ClassServlet1</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>ClassServlet</servlet-name>
-        <url-pattern>/class</url-pattern>
+        <servlet-name>ClassServlet1</servlet-name>
+        <url-pattern>/schoolclasses</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>StudentServlet</servlet-name>
+        <servlet-name>StudentServlet1</servlet-name>
         <servlet-class>com.learnersacademy.controller.StudentServlet1</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>StudentServlet</servlet-name>
-        <url-pattern>/student</url-pattern>
+        <servlet-name>StudentServlet1</servlet-name>
+        <url-pattern>/students</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>TeacherServlet</servlet-name>
+        <servlet-name>TeacherServlet1</servlet-name>
         <servlet-class>com.learnersacademy.controller.TeacherServlet1</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>TeacherServlet</servlet-name>
-        <url-pattern>/teacher</url-pattern>
+        <servlet-name>TeacherServlet1</servlet-name>
+        <url-pattern>/teachers</url-pattern>
     </servlet-mapping>
 
     <welcome-file-list>
