@@ -8,6 +8,7 @@
     <p>explore anything you want</p>
     <nav>
         <ul>
+        	<li><a href="teachers">Teachers</a></li>
             <li><a href="admin">Admins</a></li>
             <li><a href="classes">Classes</a></li>
             <li><a href="students">Students</a></li>

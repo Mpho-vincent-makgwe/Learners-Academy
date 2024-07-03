@@ -6,7 +6,7 @@
 
     <servlet>
         <servlet-name>AdminS</servlet-name>
-        <servlet-class>com.learnersacademy.servlets.AdminS</servlet-class>
+        <servlet-class>com.learnersacademy.servlets.mpho</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AdminS</servlet-name>
@@ -15,7 +15,7 @@
 
     <servlet>
         <servlet-name>ClassS</servlet-name>
-        <servlet-class>com.learnersacademy.servlets.ClassS</servlet-class>
+        <servlet-class>com.learnersacademy.servlets.mpho</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ClassS</servlet-name>
@@ -24,7 +24,7 @@
 
     <servlet>
         <servlet-name>StudentS</servlet-name>
-        <servlet-class>com.learnersacademy.servlets.StudentS</servlet-class>
+        <servlet-class>com.learnersacademy.servlets.mpho</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>StudentS</servlet-name>
@@ -33,7 +33,7 @@
 
     <servlet>
         <servlet-name>TeacherS</servlet-name>
-        <servlet-class>com.learnersacademy.servlets.TeacherS</servlet-class>
+        <servlet-class>com.learnersacademy.servlets.mpho</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>TeacherS</servlet-name>
