@@ -22,7 +22,7 @@
                     <tr>
                         <td>${schoolClass.id}</td>
                         <td>${schoolClass.name}</td>
-                        <td>${schoolClass.teacher}</td>
+                        <td>${schoolClass.teacher.name}</td> <!-- Assuming teacher is a property of Class -->
                     </tr>
                 </c:forEach>
             </table>
@@ -30,5 +30,3 @@
     </c:choose>
 </body>
 </html>
-
-        

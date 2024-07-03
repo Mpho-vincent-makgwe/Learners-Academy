@@ -11,13 +11,15 @@ public class Class {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private Long teacherId; // Assuming teacherId corresponds to the teacher's ID
 
     public Class() {
         // Default constructor required by Hibernate
     }
 
-    public Class(String name) {
+    public Class(String name, Long teacherId) {
         this.name = name;
+        this.teacherId = teacherId;
     }
 
     public Long getId() {
@@ -34,5 +36,13 @@ public class Class {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Long getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(Long teacherId) {
+        this.teacherId = teacherId;
     }
 }

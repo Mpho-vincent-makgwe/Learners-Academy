@@ -16,13 +16,13 @@
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Email</th>
+                    <th>Class ID</th>
                 </tr>
                 <c:forEach var="student" items="${students}">
                     <tr>
                         <td>${student.id}</td>
                         <td>${student.name}</td>
-                        <td>${student.email}</td>
+                        <td>${student.classId}</td>
                     </tr>
                 </c:forEach>
             </table>
@@ -30,4 +30,3 @@
     </c:choose>
 </body>
 </html>
-

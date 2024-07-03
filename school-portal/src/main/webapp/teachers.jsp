@@ -16,13 +16,11 @@
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Subject</th>
                 </tr>
                 <c:forEach var="teacher" items="${teachers}">
                     <tr>
                         <td>${teacher.id}</td>
                         <td>${teacher.name}</td>
-                        <td>${teacher.subject}</td>
                     </tr>
                 </c:forEach>
             </table>
@@ -30,4 +28,3 @@
     </c:choose>
 </body>
 </html>
-

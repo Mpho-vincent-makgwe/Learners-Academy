@@ -12,6 +12,7 @@ public class Student {
     private Long id;
     private String name;
     private String email;
+	private Long classId;
 
     public Student() {
         // Default constructor required by Hibernate
@@ -44,5 +45,9 @@ public class Student {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setClassId(int i) {
+        this.classId = (long) i;
     }
 }

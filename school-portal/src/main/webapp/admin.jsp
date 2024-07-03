@@ -15,13 +15,13 @@
             <table border="1">
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
+                    <th>Username</th>
                     <th>Email</th>
                 </tr>
                 <c:forEach var="admin" items="${admins}">
                     <tr>
                         <td>${admin.id}</td>
-                        <td>${admin.name}</td>
+                        <td>${admin.username}</td>
                         <td>${admin.email}</td>
                     </tr>
                 </c:forEach>
@@ -30,4 +30,3 @@
     </c:choose>
 </body>
 </html>
-
