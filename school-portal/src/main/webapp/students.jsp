@@ -1,12 +1,15 @@
-<%@ page import="com.learnersacademy.model.Student" %>
+<!-- students.jsp -->
+
 <%@ page import="java.util.List" %>
-<!DOCTYPE html>
+<%@ page import="com.learnersacademy.model.Student" %>
+
 <html>
 <head>
     <title>Student List</title>
 </head>
 <body>
     <h1>Student List</h1>
+    
     <c:choose>
         <c:when test="${empty students}">
             <p>No students found.</p>
@@ -28,6 +31,15 @@
             </table>
         </c:otherwise>
     </c:choose>
+
+    <form action="StudentS" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        
+        <input type="submit" value="Add Student">
+    </form>
 </body>
 </html>
-

@@ -1,11 +1,12 @@
 package com.learnersacademy.dao;
 
-import com.learnersacademy.model.Class;
-import com.learnersacademy.util.HibernateUtil;
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import java.util.List;
+import com.learnersacademy.model.Class;
+import com.learnersacademy.util.HibernateUtil;
 
 public class ClassDao {
     public void saveClass(Class clazz) {
