@@ -29,13 +29,23 @@ public class StudentServlet1 extends HttpServlet {
         super();
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Student> students = new ArrayList<>();
-        try (Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);
-                Statement statement = connection.createStatement()) {
+        Connection connection = null;
+        Statement statement = null;
 
+        try {
+            // Load the MySQL JDBC driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Establish connection
+            connection = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);
+            statement = connection.createStatement();
+
+            // Execute query
             ResultSet resultSet = statement.executeQuery("SELECT * FROM students");
+
+            // Process ResultSet
             while (resultSet.next()) {
                 Student student = new Student();
                 student.setId(resultSet.getLong("id"));
@@ -44,21 +54,36 @@ public class StudentServlet1 extends HttpServlet {
                 students.add(student);
             }
 
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-            // Handle the error
+            // Handle exceptions appropriately
+        } finally {
+            // Close resources in reverse order
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
-        request.setAttribute("students", students);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/students.jsp");
-        dispatcher.forward(request, response);
-
-        // Logging results to console
+        // Print students to console using overridden toString() method
         System.out.println("Students retrieved:");
         for (Student student : students) {
-            System.out.println(student.getId() + " | " + student.getName() + " | Class ID: " + student.getId());
+            System.out.println(student);
         }
+
+        // Proceed with servlet logic (forwarding to JSP, etc.)
+        // request.setAttribute("students", students);
+        // RequestDispatcher dispatcher = request.getRequestDispatcher("/students.jsp");
+        // dispatcher.forward(request, response);
+        
     }
+
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

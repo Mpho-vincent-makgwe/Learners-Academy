@@ -50,4 +50,12 @@ public class Student {
     public void setClassId(int i) {
         this.classId = (long) i;
     }
+    
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", classId=" + classId +
+                '}';
+    }
 }

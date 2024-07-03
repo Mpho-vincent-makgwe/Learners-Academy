@@ -8,9 +8,11 @@ public class HibernateUtil {
 
     static {
         try {
-            sessionFactory = new Configuration().configure().buildSessionFactory();
-        } catch (Exception e) {
-            e.printStackTrace();
+            Configuration configuration = new Configuration().configure();
+            sessionFactory = configuration.buildSessionFactory();
+        } catch (Throwable ex) {
+            System.err.println("Initial SessionFactory creation failed." + ex);
+            throw new ExceptionInInitializerError(ex);
         }
     }
 

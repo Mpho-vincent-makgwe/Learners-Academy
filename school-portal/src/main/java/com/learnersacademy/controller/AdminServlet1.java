@@ -43,7 +43,7 @@ public class AdminServlet1 extends HttpServlet {
         List<Admin> admins = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);
                 Statement statement = connection.createStatement()) {
-
+        	
             ResultSet resultSet = statement.executeQuery("SELECT * FROM admins");
             while (resultSet.next()) {
                 Admin admin = new Admin();
