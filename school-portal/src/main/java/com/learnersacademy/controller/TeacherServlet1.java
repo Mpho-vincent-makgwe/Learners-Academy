@@ -32,8 +32,14 @@ public class TeacherServlet1 extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<Teacher> teachers = new ArrayList<>();
-        try (Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);
-                Statement statement = connection.createStatement()) {
+        Connection connection = null;
+        Statement statement = null;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver"); // Load the MySQL JDBC driver
+
+            connection = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);
+            statement = connection.createStatement();
 
             ResultSet resultSet = statement.executeQuery("SELECT * FROM teachers");
             while (resultSet.next()) {
@@ -43,9 +49,20 @@ public class TeacherServlet1 extends HttpServlet {
                 teachers.add(teacher);
             }
 
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             // Handle the error
+        } finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         request.setAttribute("teachers", teachers);
@@ -55,7 +72,7 @@ public class TeacherServlet1 extends HttpServlet {
         // Logging results to console
         System.out.println("Teachers retrieved:");
         for (Teacher teacher : teachers) {
-            System.out.println(teacher.getId() + " | " + teacher.getName() + " | " + teacher.getEmail());
+            System.out.println(teacher.getId() + " | " + teacher.getName());
         }
     }
 

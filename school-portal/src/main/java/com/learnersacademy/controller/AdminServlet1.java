@@ -17,45 +17,53 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.learnersacademy.model.Admin;
-/**
- * Servlet implementation class AdminServlet1
- */
+
 @WebServlet(name = "AdminServlet1", urlPatterns = { "/admin" })
 public class AdminServlet1 extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/learnersacademy";
     private static final String JDBC_USER = "root";
-    private static final String JDBC_PASSWORD = "kHing$!x6";   
-	
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+    private static final String JDBC_PASSWORD = "kHing$!x6";
+
     public AdminServlet1() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<Admin> admins = new ArrayList<>();
-        try (Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);
-                Statement statement = connection.createStatement()) {
-        	
+        Connection connection = null;
+        Statement statement = null;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver"); // Load the MySQL JDBC driver
+
+            connection = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);
+            statement = connection.createStatement();
+
             ResultSet resultSet = statement.executeQuery("SELECT * FROM admins");
             while (resultSet.next()) {
                 Admin admin = new Admin();
                 admin.setId(resultSet.getLong("id"));
-                admin.setUsername(resultSet.getString("name"));
+                admin.setUsername(resultSet.getString("username"));
                 admin.setEmail(resultSet.getString("email"));
                 admins.add(admin);
             }
 
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             // Handle the error
+        } finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         request.setAttribute("admins", admins);
@@ -69,13 +77,8 @@ public class AdminServlet1 extends HttpServlet {
         }
     }
 
-
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         doGet(request, response);
     }
-
 }

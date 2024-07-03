@@ -3,7 +3,6 @@
 <html>
 <head>
     <title>Students List</title>
-    <!-- Include your CSS files or styles here -->
 </head>
 <body>
     <h1>Students List</h1>
@@ -18,13 +17,14 @@
         </thead>
         <tbody>
             <!-- Iterate over students list and display each student -->
-            <c:forEach var="student" items="${students}">
+            <c:forEach var="student" items="${requestScope.students}">
                 <tr>
-                    <td>${student.id}</td>
-                    <td>${student.name}</td>
-                    <td>${student.classId}</td>
+                  <td>${student.id}</td>
+                  <td>${student.name}</td>
+                  <td>${student.classId}</td> <!-- Make sure this matches the property name in your Student class -->
                 </tr>
             </c:forEach>
+
         </tbody>
     </table>
     

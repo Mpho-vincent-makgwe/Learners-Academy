@@ -74,13 +74,12 @@ public class StudentServlet1 extends HttpServlet {
         // Print students to console using overridden toString() method
         System.out.println("Students retrieved:");
         for (Student student : students) {
-            System.out.println(student);
+            System.out.println(student.getId() + " | " + student.getName() + " | " + student.getClassId());
         }
 
-        // Proceed with servlet logic (forwarding to JSP, etc.)
-        // request.setAttribute("students", students);
-        // RequestDispatcher dispatcher = request.getRequestDispatcher("/students.jsp");
-        // dispatcher.forward(request, response);
+        request.setAttribute("students", students);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/students.jsp");
+        dispatcher.forward(request, response);
         
     }
 
