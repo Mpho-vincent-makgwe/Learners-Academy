@@ -37,7 +37,6 @@ public class TeacherServlet1 extends HttpServlet {
 
             ResultSet resultSet = statement.executeQuery("SELECT * FROM teachers");
             while (resultSet.next()) {
-            	System.out.println("Teachers: " + resultSet);
                 Teacher teacher = new Teacher();
                 teacher.setId(resultSet.getLong("id"));
                 teacher.setName(resultSet.getString("name"));

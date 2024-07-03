@@ -50,7 +50,7 @@ public class ClassServlet1 extends HttpServlet {
         }
 
         request.setAttribute("classes", classes);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/schoolclasses.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/classes.jsp");
         dispatcher.forward(request, response);
 
         // Logging results to console
