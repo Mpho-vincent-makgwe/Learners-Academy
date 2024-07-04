@@ -7,7 +7,7 @@
 <title>Login - Learners Academy</title>
 </head>
 <body>
-    <h1>Login</h1>
+    <h1>Admin Login</h1>
     <form action="LoginServlet" method="post">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required><br>
