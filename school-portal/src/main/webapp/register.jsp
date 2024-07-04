@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>Register</h1>
-    <form action="register" method="post">
+    <form action="RegisterServlet" method="post">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required><br>
         <label for="password">Password:</label>
@@ -17,5 +17,6 @@
         <input type="email" id="email" name="email" required><br>
         <button type="submit">Register</button>
     </form>
+    <p>Already have an account? <a href="register">Login here</a>.</p>
 </body>
 </html>

@@ -6,6 +6,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,94 +17,83 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/login")
-public class LoginServlet extends HttpServlet {
+import com.learnersacademy.model.Admin;
+
+@WebServlet(name = "AdminServlet1", urlPatterns = { "/admin" })
+public class AdminServlet1 extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/learnersacademy";
     private static final String JDBC_USER = "root";
     private static final String JDBC_PASSWORD = "kHing$!x6";
 
-    public LoginServlet() {
+    public AdminServlet1() {
         super();
     }
 
-    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Handle GET requests (if needed)
-        // Typically used to show login form
-        showLoginPage(request, response);
+        // Ensure the user is logged in
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("admin") == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
+
+        List<Admin> admins = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver"); // Load the MySQL JDBC driver
+
+            connection = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);
+            preparedStatement = connection.prepareStatement("SELECT * FROM admins");
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Admin admin = new Admin();
+                admin.setId(resultSet.getLong("id"));
+                admin.setUsername(resultSet.getString("username"));
+                admin.setEmail(resultSet.getString("email"));
+                admins.add(admin);
+            }
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            // Handle the error
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        request.setAttribute("admins", admins);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/admin.jsp");
+        dispatcher.forward(request, response);
+
+        // Logging results to console
+        System.out.println("Admins retrieved:");
+        for (Admin admin : admins) {
+            System.out.println(admin.getId() + " | " + admin.getUsername() + " | " + admin.getEmail());
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getServletPath();
-        switch (action) {
-            case "/login":
-                loginAdmin(request, response);
-                break;
-            case "/register":
-                registerAdmin(request, response);
-                break;
-            default:
-                response.sendError(HttpServletResponse.SC_NOT_FOUND);
-                break;
-        }
+
     }
 
-    private void showLoginPage(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
-        dispatcher.forward(request, response);
-    }
-
-    private void loginAdmin(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-
-        try (Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);
-             PreparedStatement preparedStatement = connection.prepareStatement(
-                     "SELECT * FROM admins WHERE username = ? AND password = ?")) {
-            preparedStatement.setString(1, username);
-            preparedStatement.setString(2, password); // Consider hashing the password
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            if (resultSet.next()) {
-                // Login successful
-                HttpSession session = request.getSession();
-                session.setAttribute("admin", username);
-                response.sendRedirect("admin.jsp"); // Redirect to admin page after successful login
-            } else {
-                // Login failed
-                request.setAttribute("error", "Invalid username or password");
-                showLoginPage(request, response); // Show login page with error message
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            response.sendRedirect("login.jsp"); // Redirect back to login page on error
-        }
-    }
-
-    private void registerAdmin(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String email = request.getParameter("email");
-
-        try (Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);
-             PreparedStatement preparedStatement = connection.prepareStatement(
-                     "INSERT INTO admins (username, password, email) VALUES (?, ?, ?)")) {
-            preparedStatement.setString(1, username);
-            preparedStatement.setString(2, password); // Consider hashing the password
-            preparedStatement.setString(3, email);
-            preparedStatement.executeUpdate();
-
-            response.sendRedirect("login.jsp?registered=true"); // Redirect to login page after successful registration
-        } catch (SQLException e) {
-            e.printStackTrace();
-            response.sendRedirect("register.jsp"); // Redirect back to register page on error
-        }
-    }
+ 
 }
