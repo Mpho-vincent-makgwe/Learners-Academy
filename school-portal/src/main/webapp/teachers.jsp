@@ -1,7 +1,6 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.learnersacademy.model.Teacher" %>
 <%@ page import="java.util.List" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,6 +25,12 @@
                     </tr>
                 </c:forEach>
             </table>
+            <script>
+                console.log("Teachers retrieved:");
+                <c:forEach var="teacher" items="${requestScope.teachers}">
+                    console.log("ID: ${teacher.id}, Name: ${teacher.name}");
+                </c:forEach>
+            </script>
         </c:otherwise>
     </c:choose>
 </body>

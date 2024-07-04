@@ -2,7 +2,6 @@ package com.learnersacademy.controller;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -17,13 +16,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.learnersacademy.model.Teacher;
+import com.learnersacademy.util.DBUtil;
 
 @WebServlet(name = "TeacherServlet1", urlPatterns = { "/teachers" })
 public class TeacherServlet1 extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/learnersacademy";
-    private static final String JDBC_USER = "root";
-    private static final String JDBC_PASSWORD = "kHing$!x6";
 
     public TeacherServlet1() {
         super();
@@ -32,14 +29,9 @@ public class TeacherServlet1 extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<Teacher> teachers = new ArrayList<>();
-        Connection connection = null;
-        Statement statement = null;
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver"); // Load the MySQL JDBC driver
-
-            connection = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);
-            statement = connection.createStatement();
+        try (Connection connection = DBUtil.getConnection();
+             Statement statement = connection.createStatement()) {
 
             ResultSet resultSet = statement.executeQuery("SELECT * FROM teachers");
             while (resultSet.next()) {
@@ -48,34 +40,14 @@ public class TeacherServlet1 extends HttpServlet {
                 teacher.setName(resultSet.getString("name"));
                 teachers.add(teacher);
             }
-
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
-            // Handle the error
-        } finally {
-            try {
-                if (statement != null) {
-                    statement.close();
-                }
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
 
         request.setAttribute("teachers", teachers);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/teachers.jsp");
         dispatcher.forward(request, response);
-
-        // Logging results to console
-        System.out.println("Teachers retrieved:");
-        for (Teacher teacher : teachers) {
-            System.out.println(teacher.getId() + " | " + teacher.getName());
-        }
     }
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doGet(request, response);
