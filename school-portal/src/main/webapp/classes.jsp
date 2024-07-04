@@ -1,6 +1,6 @@
 <%@ page import="com.learnersacademy.model.Class" %>
 <%@ page import="java.util.List" %>
-
+<!DOCTYPE html>
 <html>
 <head>
     <title>School Classes List</title>
@@ -8,7 +8,7 @@
 <body>
     <h1>School Classes List</h1>
     <c:choose>
-        <c:when test="${empty classes}">
+        <c:when test="${empty schoolClasses}">
             <p>No school classes found.</p>
         </c:when>
         <c:otherwise>
@@ -18,11 +18,11 @@
                     <th>Name</th>
                     <th>Teacher</th>
                 </tr>
-                <c:forEach var="classes" items="${classes}">
+                <c:forEach var="schoolClass" items="${schoolClasses}">
                     <tr>
-                        <td>${class.id}</td>
-                        <td>${class.name}</td>
-                        <td>${class.teacher}</td>
+                        <td>${schoolClass.id}</td>
+                        <td>${schoolClass.name}</td>
+                        <td>${schoolClass.teacher.name}</td> <!-- Assuming teacher is a property of Class -->
                     </tr>
                 </c:forEach>
             </table>
@@ -30,5 +30,3 @@
     </c:choose>
 </body>
 </html>
-
-        

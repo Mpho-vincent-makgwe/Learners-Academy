@@ -1,32 +1,19 @@
 package com.learnersacademy.model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 @Entity
 public class Student {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
     private String name;
-    private String email;
+    private int classId;
 
-    public Student() {
-        // Default constructor required by Hibernate
-    }
-
-    public Student(String name, String email) {
-        this.name = name;
-        this.email = email;
-    }
-
-    public Long getId() {
+    // Constructor, getters, setters
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -38,11 +25,18 @@ public class Student {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
+    public int getClassId() {
+        return classId;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setClassId(int classId) {
+        this.classId = classId;
+    }
+
+    // Override toString() for debugging purposes
+    @Override
+    public String toString() {
+        return "Student{id=" + id + ", name='" + name + "', classId=" + classId + "}";
     }
 }
+

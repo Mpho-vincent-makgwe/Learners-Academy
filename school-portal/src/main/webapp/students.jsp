@@ -1,45 +1,32 @@
-<!-- students.jsp -->
-
-<%@ page import="java.util.List" %>
-<%@ page import="com.learnersacademy.model.Student" %>
-
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Student List</title>
+    <title>Students List</title>
 </head>
 <body>
-    <h1>Student List</h1>
+    <h1>Students List</h1>
     
-    <c:choose>
-        <c:when test="${empty students}">
-            <p>No students found.</p>
-        </c:when>
-        <c:otherwise>
-            <table border="1">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Class ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Iterate over students list and display each student -->
+            <c:forEach var="student" items="${requestScope.students}">
                 <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
+                  <td>${student.id}</td>
+                  <td>${student.name}</td>
+                  <td>${student.classId}</td> <!-- Make sure this matches the property name in your Student class -->
                 </tr>
-                <c:forEach var="student" items="${students}">
-                    <tr>
-                        <td>${student.id}</td>
-                        <td>${student.name}</td>
-                        <td>${student.email}</td>
-                    </tr>
-                </c:forEach>
-            </table>
-        </c:otherwise>
-    </c:choose>
+            </c:forEach>
 
-    <form action="StudentS" method="post">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
-        
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-        
-        <input type="submit" value="Add Student">
-    </form>
+        </tbody>
+    </table>
+    
 </body>
 </html>
