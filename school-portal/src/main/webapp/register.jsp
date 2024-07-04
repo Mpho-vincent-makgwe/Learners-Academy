@@ -4,19 +4,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Register - Learners Academy</title>
+<title>Register</title>
 </head>
 <body>
-	<h1>Register</h1>
-    <form action="RegisterServlet" method="post">
+    <h1>Register</h1>
+    <form action="register" method="post">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required><br>
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required><br>
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required><br>
-        <button type="submit">Register</button>
+        <input type="submit" value="Register">
     </form>
-    <p>Already have an account? <a href="register">Login here</a>.</p>
+    <c:if test="${not empty errorMessage}">
+        <p style="color:red;">${errorMessage}</p>
+    </c:if>
+    <p>Already have an account? <a href="login.jsp">Login here</a></p>
 </body>
 </html>

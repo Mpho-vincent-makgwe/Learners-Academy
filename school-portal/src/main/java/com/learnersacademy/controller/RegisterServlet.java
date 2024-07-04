@@ -1,11 +1,8 @@
 package com.learnersacademy.controller;
 
-import com.learnersacademy.util.DBUtil;
-
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,31 +10,36 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.learnersacademy.util.DBUtil;
 
-@WebServlet("/RegisterServlet")
+@WebServlet(name = "RegisterServlet", urlPatterns = { "/register" })
 public class RegisterServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        printAllAdmins();
-        RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
-        dispatcher.forward(request, response);
-    }
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String username = request.getParameter("username");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
 
-    private void printAllAdmins() {
         try (Connection connection = DBUtil.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM admins");
-             ResultSet resultSet = preparedStatement.executeQuery()) {
+             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO admins (username, email, password) VALUES (?, ?, ?)")) {
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, email);
+            preparedStatement.setString(3, password);
+            int result = preparedStatement.executeUpdate();
 
-            while (resultSet.next()) {
-                String adminUsername = resultSet.getString("username");
-                String adminEmail = resultSet.getString("email");
-                System.out.println("Admin: " + adminUsername + ", Email: " + adminEmail);
+            if (result > 0) {
+                response.sendRedirect("login.jsp");
+            } else {
+                request.setAttribute("errorMessage", "Registration failed, please try again");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
+                dispatcher.forward(request, response);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
+            request.setAttribute("errorMessage", "Database error: " + e.getMessage());
+            RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
+            dispatcher.forward(request, response);
         }
     }
 }
