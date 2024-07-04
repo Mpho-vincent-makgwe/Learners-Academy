@@ -1,4 +1,4 @@
-package com.learnersacademy.servlets;
+package com.learnersacademy.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class mpho
+ * Servlet implementation class SchoolClassServlet1
  */
-@WebServlet("/mpho")
-public class mpho extends HttpServlet {
+@WebServlet("/SchoolClassServlet1")
+public class SchoolClassServlet1 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public mpho() {
+    public SchoolClassServlet1() {
         super();
         // TODO Auto-generated constructor stub
     }
