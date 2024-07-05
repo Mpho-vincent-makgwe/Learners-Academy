@@ -1,0 +1,60 @@
+package com.learnersacademy.util;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.nio.charset.StandardCharsets;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class DBUtil {
+    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/learnersacademy";
+    private static final String JDBC_USER = "root";
+    private static final String JDBC_PASSWORD = "kHing$!x6";
+
+    static {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            System.err.println("Error loading MySQL Driver: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public static Connection getConnection() throws SQLException {
+        try {
+            return DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);
+        } catch (SQLException e) {
+            System.err.println("Error establishing database connection: " + e.getMessage());
+            throw e;
+        }
+    }
+
+    public static void executeSqlFile(String fileName) {
+        try (Connection connection = getConnection();
+             Reader reader = new InputStreamReader(DBUtil.class.getClassLoader().getResourceAsStream(fileName), StandardCharsets.UTF_8);
+             BufferedReader bufferedReader = new BufferedReader(reader)) {
+
+            StringBuilder sql = new StringBuilder();
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                sql.append(line).append("\n");
+            }
+
+            try (Statement statement = connection.createStatement()) {
+                statement.execute(sql.toString());
+                System.out.println("SQL file executed successfully.");
+            }
+        } catch (Exception e) {
+            System.err.println("Error executing SQL file: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        // Example usage: execute the schema.sql file
+        executeSqlFile("sql/schema.sql");
+    }
+}

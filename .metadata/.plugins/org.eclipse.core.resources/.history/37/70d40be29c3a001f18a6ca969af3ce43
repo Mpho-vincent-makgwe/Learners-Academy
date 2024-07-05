@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.learnersacademy.util.DBUtil;
-import com.learnersacademy.util.PasswordUtil;
 
 @WebServlet(name = "RegisterServlet", urlPatterns = { "/register" })
 public class RegisterServlet extends HttpServlet {
@@ -24,26 +23,23 @@ public class RegisterServlet extends HttpServlet {
 
         try (Connection connection = DBUtil.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO admins (username, email, password) VALUES (?, ?, ?)")) {
-            String hashedPassword = PasswordUtil.hashPassword(password);
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, email);
-            preparedStatement.setString(3, hashedPassword);
+            preparedStatement.setString(3, password);
             int result = preparedStatement.executeUpdate();
 
             if (result > 0) {
                 response.sendRedirect("login.jsp");
             } else {
-                handleError(request, response, "Registration failed, please try again");
+                request.setAttribute("errorMessage", "Registration failed, please try again");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
+                dispatcher.forward(request, response);
             }
         } catch (SQLException e) {
-            log("Database error during registration: " + e.getMessage(), e);
-            handleError(request, response, "Database error: " + e.getMessage());
+            e.printStackTrace();
+            request.setAttribute("errorMessage", "Database error: " + e.getMessage());
+            RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
+            dispatcher.forward(request, response);
         }
-    }
-
-    private void handleError(HttpServletRequest request, HttpServletResponse response, String errorMessage) throws ServletException, IOException {
-        request.setAttribute("errorMessage", errorMessage);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
-        dispatcher.forward(request, response);
     }
 }

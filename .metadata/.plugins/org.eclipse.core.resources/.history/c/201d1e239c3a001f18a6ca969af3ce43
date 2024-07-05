@@ -35,20 +35,20 @@ public class LoginServlet extends HttpServlet {
                     session.setAttribute("name", username);
                     response.sendRedirect("index.jsp");
                 } else {
-                    handleError(request, response, "Invalid username or password");
+                    request.setAttribute("errorMessage", "Invalid username or password");
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+                    dispatcher.forward(request, response);
                 }
             } else {
-                handleError(request, response, "Invalid username or password");
+                request.setAttribute("errorMessage", "Invalid username or password");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+                dispatcher.forward(request, response);
             }
         } catch (SQLException e) {
-            log("Database error during login: " + e.getMessage(), e);
-            handleError(request, response, "Database error: " + e.getMessage());
+            e.printStackTrace();
+            request.setAttribute("errorMessage", "Database error: " + e.getMessage());
+            RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+            dispatcher.forward(request, response);
         }
-    }
-
-    private void handleError(HttpServletRequest request, HttpServletResponse response, String errorMessage) throws ServletException, IOException {
-        request.setAttribute("errorMessage", errorMessage);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
-        dispatcher.forward(request, response);
     }
 }

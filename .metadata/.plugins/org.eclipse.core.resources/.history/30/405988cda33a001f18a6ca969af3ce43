@@ -4,11 +4,6 @@
          http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
-	<!-- Servlet Context Listener -->
-    <listener>
-        <listener-class>com.learnersacademy.listener.AppContextListener</listener-class>
-    </listener>
-    
     <servlet>
         <servlet-name>AdminServlet1</servlet-name>
         <servlet-class>com.learnersacademy.controller.AdminServlet1</servlet-class>
